@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fundacja Wielkie Serca | Przekaż 1,5% podatku</title>
+  <meta name="description" content="Fundacja Wielkie Serca z Lublina pomaga dzieciom chorym na nowotwory i ich rodzinom. Przekaż 1,5% podatku. Projekt szkolny, fundacja fikcyjna.">
+  <link rel="icon" href="img/serce.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Skrypt ustawia zapamiętany motyw zanim strona się narysuje, żeby nie mrugała -->
+  <script>
+    try {
+      const motyw = localStorage.getItem('motyw');
+      if (motyw) document.documentElement.dataset.theme = motyw;
+      if (localStorage.getItem('kontrast') === 'tak') document.documentElement.dataset.contrast = 'wysoki';
+      const czcionka = localStorage.getItem('czcionka');
+      if (czcionka) document.documentElement.style.fontSize = czcionka + '%';
+    } catch (e) { /* brak dostępu do pamięci przeglądarki, zostają ustawienia domyślne */ }
+  </script>
+</head>
+<body>
+
+  <a class="pomin" href="#tresc">Przejdź do treści</a>
+
+  <p class="pasek-projekt">Projekt szkolny. Fundacja Wielkie Serca i jej dane są fikcyjne, nie przekazuj na nią podatku.</p>
+
+  <!-- ===== MENU ===== -->
+  <header class="naglowek">
+    <div class="kontener naglowek__wnetrze">
+      <a href="#start" class="logo" aria-label="Fundacja Wielkie Serca, strona główna">
+        <svg class="logo__serce" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s-11-6.6-11-15A6 6 0 0 1 16 9a6 6 0 0 1 11 4c0 8.4-11 15-11 15z"/></svg>
+        <span>Wielkie Serca</span>
+      </a>
+
+      <button class="menu-przycisk" aria-expanded="false" aria-controls="menu" aria-label="Otwórz menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="menu" class="menu" aria-label="Menu główne">
+        <a href="#jak-przekazac">Jak przekazać 1,5%</a>
+        <a href="#kalkulator">Kalkulator</a>
+        <a href="#o-nas">O nas</a>
+        <a href="#co-robimy">Co robimy</a>
+        <a href="#historie">Historie</a>
+        <a href="#faq">Pytania</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <div class="narzedzia" role="group" aria-label="Ustawienia wyglądu">
+        <button id="czcionka-mniej" class="narzedzie" aria-label="Zmniejsz tekst">A-</button>
+        <button id="czcionka-wiecej" class="narzedzie" aria-label="Powiększ tekst">A+</button>
+        <button id="kontrast" class="narzedzie" aria-pressed="false" aria-label="Wysoki kontrast">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+        </button>
+        <button id="motyw" class="narzedzie" aria-pressed="false" aria-label="Tryb ciemny">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="tresc">
+
+    <!-- ===== 1. HERO ===== -->
+    <section id="start" class="hero">
+      <div class="kontener hero__wnetrze">
+        <h1>1,5% Twojego podatku to&nbsp;100% nadziei</h1>
+        <p class="hero__lead">Pomagamy dzieciom chorym na nowotwory i ich rodzinom. Przekazanie 1,5% nic Cię nie kosztuje, a dla naszych podopiecznych znaczy bardzo dużo.</p>
+
+        <div class="krs">
+          <span class="krs__etykieta">Nasz numer KRS</span>
+          <span class="krs__numer" id="krs-numer">0000000000</span>
+          <button class="przycisk przycisk--jasny krs__kopiuj" data-kopiuj="0000000000">Kopiuj numer</button>
+          <span class="krs__komunikat" role="status" aria-live="polite"></span>
+        </div>
+
+        <div class="hero__przyciski">
+          <a href="#jak-przekazac" class="przycisk">Jak przekazać 1,5%?</a>
+          <a href="#o-nas" class="przycisk przycisk--obrys">Poznaj nas</a>
+        </div>
+
+        <div class="odliczanie" aria-live="off">
+          <p class="odliczanie__tytul">Do końca rozliczeń PIT (<span id="termin-data">30 kwietnia</span>) zostało:</p>
+          <div class="odliczanie__pola">
+            <div><strong id="dni">0</strong><span>dni</span></div>
+            <div><strong id="godziny">0</strong><span>godzin</span></div>
+            <div><strong id="minuty">0</strong><span>minut</span></div>
+            <div><strong id="sekundy">0</strong><span>sekund</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. JAK PRZEKAZAĆ ===== -->
+    <section id="jak-przekazac" class="sekcja">
+      <div class="kontener">
+        <h2 class="pokaz">Przekaż 1,5% w trzech krokach</h2>
+        <p class="sekcja__wstep pokaz">Całość zajmuje około minuty. Pieniądze, które przekażesz, i tak trafiłyby do urzędu skarbowego. Ty decydujesz, że pójdą na leczenie dzieci.</p>
+
+        <ol class="kroki">
+          <li class="krok pokaz">
+            <span class="krok__nr">1</span>
+            <h3>Otwórz swoje zeznanie</h3>
+            <p>Zaloguj się do usługi Twój e-PIT na stronie podatki.gov.pl albo wypełnij PIT w programie czy na papierze.</p>
+          </li>
+          <li class="krok pokaz">
+            <span class="krok__nr">2</span>
+            <h3>Wpisz nasz numer KRS</h3>
+            <p>W części o przekazaniu 1,5% podatku dla organizacji pożytku publicznego wpisz numer <strong>0000000000</strong>.</p>
+          </li>
+          <li class="krok pokaz">
+            <span class="krok__nr">3</span>
+            <h3>Dodaj cel szczegółowy</h3>
+            <p>To pole jest nieobowiązkowe. Jeśli chcesz wesprzeć konkretne dziecko, wpisz jego imię i nazwisko. Pusty cel oznacza pomoc dla wszystkich podopiecznych.</p>
+          </li>
+        </ol>
+
+        <ul class="wskazowki pokaz">
+          <li>Termin złożenia PIT za 2026 rok mija 30 kwietnia 2027.</li>
+          <li>Zaznacz zgodę na przekazanie 1,5% także w kolejnych latach. Wtedy nie musisz pamiętać o tym co roku.</li>
+          <li>Jeśli chcesz, możesz podać nam swoje imię i nazwisko. Dzięki temu będziemy mogli Ci podziękować.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== 3. KALKULATOR ===== -->
+    <section id="kalkulator" class="sekcja sekcja--tlo">
+      <div class="kontener kalkulator">
+        <div class="kalkulator__opis pokaz">
+          <h2>Policz, ile możesz przekazać</h2>
+          <p>Wpisz kwotę podatku należnego z Twojego PIT. Znajdziesz ją w zeznaniu w rubryce podatek należny.</p>
+        </div>
+
+        <form class="kalkulator__formularz pokaz" id="formularz-kalkulator" novalidate>
+          <label for="podatek">Twój podatek należny (zł)</label>
+          <input type="number" id="podatek" name="podatek" min="0" step="1" inputmode="numeric" placeholder="np. 8400">
+          <p class="kalkulator__blad" id="kalkulator-blad" role="alert"></p>
+
+          <div class="kalkulator__wynik" aria-live="polite">
+            <p>Do fundacji trafi:</p>
+            <p class="kalkulator__kwota" id="kwota-wynik">0,00 zł</p>
+            <p class="kalkulator__znaczenie" id="kwota-znaczenie">Wpisz kwotę, a pokażemy, na co możemy ją przeznaczyć.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== 4. O NAS ===== -->
+    <section id="o-nas" class="sekcja">
+      <div class="kontener">
+        <h2 class="pokaz">Założyło nas trzech kolegów z jednej klasy</h2>
+
+        <div class="historia">
+          <div class="historia__tekst pokaz">
+            <p>W grudniu 2024 roku klasa z V Liceum Ogólnokształcącego im. Marii Skłodowskiej-Curie w Lublinie zawiozła paczki mikołajkowe na oddział onkologii i hematologii dziecięcej. Plan był prosty: zostawić prezenty i wrócić na lekcje.</p>
+            <p>Dawid, Patryk i Staszek zostali do wieczora. Staszek rysował z dziećmi komiksy o superbohaterach, Patryk przegrał dziewięć meczów z rzędu w piłkę na konsoli z sześcioletnim Kubą, a Dawid zauważył, że dla czternaściorga dzieci zabrakło paczek.</p>
+            <p>Następnego dnia wrócili z brakującymi prezentami, zebranymi w szkole na jednej przerwie. Potem był kiermasz ciast, który dał 2140 zł, pierwszy Bieg Wielkich Serc nad Zalewem Zemborzyckim i koncert w auli szkoły. W 2025 roku, z pomocą rodziców i wychowawczyni, zarejestrowali Fundację Wielkie Serca.</p>
+            <p>Dziś pomagamy dzieciom z całej Lubelszczyzny, a większość naszych wolontariuszy to uczniowie lubelskich szkół.</p>
+          </div>
+          <figure class="historia__zdjecie pokaz">
+            <img src="img/zalozyciele.jpg" alt="Trzech uśmiechniętych chłopaków rozmawia na tle zachodzącego słońca" width="960" height="656" loading="lazy">
+            <figcaption>Zdjęcie poglądowe. Tu wstawcie swoje wspólne zdjęcie.</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="zarzad__tytul pokaz">Zarząd fundacji</h3>
+        <div class="zarzad">
+          <article class="osoba pokaz">
+            <span class="osoba__inicjaly" aria-hidden="true">DF</span>
+            <h4>Dawid Fila</h4>
+            <p class="osoba__rola">Prezes zarządu, finanse</p>
+            <p>To on policzył brakujące paczki i od tamtej pory pilnuje każdej złotówki. Prowadzi arkusz, w którym widać, na co poszła każda wpłata. Po godzinach gra na gitarze.</p>
+          </article>
+          <article class="osoba pokaz">
+            <span class="osoba__inicjaly" aria-hidden="true">PF</span>
+            <h4>Patryk Fac</h4>
+            <p class="osoba__rola">Wiceprezes, wydarzenia</p>
+            <p>Bieg Wielkich Serc to jego pomysł. W pierwszej edycji wystartowało 312 osób. Organizuje też turnieje e-sportowe, z których cały dochód idzie na podopiecznych. Z Kubą wciąż przegrywa.</p>
+          </article>
+          <article class="osoba pokaz">
+            <span class="osoba__inicjaly" aria-hidden="true">SK</span>
+            <h4>Stanisław Korulczyk</h4>
+            <p class="osoba__rola">Członek zarządu, świetlica i grafika</p>
+            <p>Logo fundacji narysował na marginesie zeszytu do matematyki. W każdy czwartek prowadzi na oddziale warsztaty komiksu. Komiksy dzieci wydaliśmy w 2026 roku jako książkę.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. CO ROBIMY ===== -->
+    <section id="co-robimy" class="sekcja sekcja--tlo">
+      <div class="kontener">
+        <h2 class="pokaz">Co robimy</h2>
+        <p class="sekcja__wstep pokaz">Pieniądze z 1,5% podatku to największa część naszego budżetu. Wydajemy je na sześć rzeczy.</p>
+
+        <div class="karty">
+          <article class="karta pokaz">
+            <h3>Leczenie i rehabilitacja</h3>
+            <p>Dopłacamy do leków, których nie refunduje NFZ, do turnusów rehabilitacyjnych i do sprzętu, np. wózków czy pionizatorów.</p>
+          </article>
+          <article class="karta pokaz">
+            <h3>Wsparcie psychologa</h3>
+            <p>Opłacamy spotkania z psychologiem dla dzieci, rodziców i rodzeństwa. Choroba dotyka całą rodzinę.</p>
+          </article>
+          <article class="karta pokaz">
+            <h3>Dojazdy na leczenie</h3>
+            <p>Zwracamy koszty dojazdów do szpitala rodzinom spoza Lublina. Część z nich jeździ na chemioterapię dwa razy w tygodniu.</p>
+          </article>
+          <article class="karta pokaz">
+            <h3>Świetlica na oddziale</h3>
+            <p>Kupujemy książki, gry i przybory do rysowania. Wolontariusze prowadzą zajęcia, a raz w miesiącu na oddział przychodzą superbohaterowie.</p>
+          </article>
+          <article class="karta pokaz">
+            <h3>Paczki i święta</h3>
+            <p>Na Mikołajki, Wielkanoc i Dzień Dziecka przygotowujemy paczki dla każdego dziecka na oddziale. Tak zaczęła się fundacja.</p>
+          </article>
+          <article class="karta pokaz">
+            <h3>Akcje w szkołach</h3>
+            <p>Uczymy w szkołach, jak rozpoznać niepokojące objawy i jak wspierać kolegę, który choruje i wraca do klasy po leczeniu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. LICZBY + CEL ===== -->
+    <section id="liczby" class="sekcja sekcja--ciemna">
+      <div class="kontener">
+        <h2 class="pokaz">Wielkie Serca w liczbach</h2>
+        <div class="liczby">
+          <div class="liczba pokaz"><strong data-licznik="146">0</strong><span>dzieci pod naszą opieką</span></div>
+          <div class="liczba pokaz"><strong><span data-licznik="418">0</span><span class="liczba__jednostka">tys. zł</span></strong><span>przekazanych na leczenie</span></div>
+          <div class="liczba pokaz"><strong data-licznik="64">0</strong><span>wolontariuszy</span></div>
+          <div class="liczba pokaz"><strong data-licznik="1870">0</strong><span>paczek dla dzieci</span></div>
+        </div>
+
+        <div class="cel pokaz">
+          <h3>Nasz cel na 2027 rok: sala rehabilitacji przy oddziale</h3>
+          <p>Potrzebujemy 120 000 zł na sprzęt i remont sali, w której dzieci będą ćwiczyć bez wychodzenia ze szpitala.</p>
+          <div class="cel__pasek" role="progressbar" aria-valuemin="0" aria-valuemax="120000" aria-valuenow="81600" aria-label="Postęp zbiórki">
+            <div class="cel__wypelnienie" data-procent="68"></div>
+          </div>
+          <p class="cel__stan"><strong>81 600 zł</strong> z 120 000 zł, czyli <strong>68%</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. HISTORIE ===== -->
+    <section id="historie" class="sekcja">
+      <div class="kontener">
+        <h2 class="pokaz">Historie naszych podopiecznych</h2>
+        <p class="sekcja__wstep pokaz">Imiona zmieniliśmy, a zdjęcia są symboliczne. Prywatność dzieci jest dla nas ważniejsza niż efektowna strona.</p>
+
+        <div class="historie">
+          <article class="opowiesc pokaz">
+            <img src="img/kredki.jpg" alt="Kolorowe kredki w żółtym pojemniku, w tle dziecko rysujące przy stole" width="960" height="679" loading="lazy">
+            <div class="opowiesc__tresc">
+              <h3>Zosia, 7 lat</h3>
+              <p>Białaczkę wykryto u niej w przedszkolu. Przez dwa lata leczenia narysowała ponad 400 obrazków, a najlepsze wisi dziś na korytarzu oddziału. We wrześniu poszła do pierwszej klasy.</p>
+            </div>
+          </article>
+          <article class="opowiesc pokaz">
+            <img src="img/mis.jpg" alt="Pluszowy miś z czerwoną muszką na niebieskim tle" width="960" height="589" loading="lazy">
+            <div class="opowiesc__tresc">
+              <h3>Kuba, 6 lat</h3>
+              <p>Najlepszy gracz na oddziale i postrach Patryka. Jest w trakcie leczenia guza nerki. Fundacja opłaca jego mamie dojazdy z Zamościa i noclegi w Lublinie.</p>
+            </div>
+          </article>
+          <article class="opowiesc pokaz">
+            <img src="img/misie.jpg" alt="Rodzina pluszowych misiów różnej wielkości na białym tle" width="1023" height="683" loading="lazy">
+            <div class="opowiesc__tresc">
+              <h3>Ola, 14 lat</h3>
+              <p>Po leczeniu chłoniaka potrzebowała rehabilitacji, żeby wrócić do siatkówki. Dzięki 1,5% od naszych darczyńców przeszła trzy turnusy. W tym roku znowu gra w szkolnej drużynie.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8. INNE FORMY POMOCY ===== -->
+    <section id="pomoc" class="sekcja sekcja--tlo">
+      <div class="kontener pomoc">
+        <img class="pomoc__zdjecie pokaz" src="img/prezenty.jpg" alt="Zapakowane prezenty z czerwonymi kokardami na drewnianym stole" width="960" height="640" loading="lazy">
+        <div class="pomoc__tresc pokaz">
+          <h2>Możesz pomóc też inaczej</h2>
+          <dl class="pomoc__lista">
+            <dt>Darowizna na konto</dt>
+            <dd>00 0000 0000 0000 0000 0000 0000, tytuł: darowizna na cele statutowe</dd>
+            <dt>Wolontariat</dt>
+            <dd>Szukamy osób do świetlicy, przy wydarzeniach i do pakowania paczek. Wystarczy mieć 16 lat i zgodę rodzica.</dd>
+            <dt>Zbiórka w szkole</dt>
+            <dd>Zorganizuj kiermasz albo zbiórkę zabawek. Pomożemy z plakatami i odbierzemy dary.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 9. FAQ ===== -->
+    <section id="faq" class="sekcja">
+      <div class="kontener kontener--waski">
+        <h2 class="pokaz">Najczęstsze pytania</h2>
+
+        <details class="pytanie pokaz">
+          <summary>Czy przekazanie 1,5% coś mnie kosztuje?</summary>
+          <p>Nie. Te pieniądze są częścią podatku, który i tak płacisz. Zamiast trafić do budżetu państwa, trafią do fundacji. Twój podatek nie rośnie ani o złotówkę.</p>
+        </details>
+        <details class="pytanie pokaz">
+          <summary>Czy mogę wesprzeć konkretne dziecko?</summary>
+          <p>Tak. W polu cel szczegółowy wpisz imię i nazwisko dziecka. Całą kwotę przeznaczymy na jego leczenie i rehabilitację.</p>
+        </details>
+        <details class="pytanie pokaz">
+          <summary>Rozliczam się wspólnie z małżonkiem. Co wtedy?</summary>
+          <p>Każde z was może przekazać 1,5% swojego podatku. Na wspólnym zeznaniu wpisujecie numer KRS raz, a urząd skarbowy przekaże obie części.</p>
+        </details>
+        <details class="pytanie pokaz">
+          <summary>Do kiedy mogę to zrobić?</summary>
+          <p>Do 30 kwietnia, czyli do końca terminu składania PIT. Jeśli złożysz korektę zeznania w ciągu miesiąca od tego terminu, też możesz wskazać naszą fundację.</p>
+        </details>
+        <details class="pytanie pokaz">
+          <summary>Jestem emerytem albo rencistą. Czy też mogę pomóc?</summary>
+          <p>Tak. Jeśli nie składasz PIT samodzielnie, wypełnij formularz PIT-OP i złóż go w urzędzie skarbowym albo przez Twój e-PIT.</p>
+        </details>
+        <details class="pytanie pokaz">
+          <summary>Skąd mam wiedzieć, na co poszły pieniądze?</summary>
+          <p>Co roku publikujemy sprawozdanie z wydatków. Dawid pilnuje, żeby każda wpłata miała swój wpis.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ===== 10. KONTAKT ===== -->
+    <section id="kontakt" class="sekcja sekcja--tlo">
+      <div class="kontener kontakt">
+        <div class="pokaz">
+          <h2>Kontakt</h2>
+          <p>Napisz albo zadzwoń. Odpowiadamy po lekcjach, zwykle tego samego dnia.</p>
+        </div>
+        <ul class="kontakt__lista pokaz">
+          <li><span>Adres</span>Fundacja Wielkie Serca, Lublin</li>
+          <li><span>E-mail</span><a href="mailto:kontakt@wielkieserca.example">kontakt@wielkieserca.example</a></li>
+          <li><span>Telefon</span>81 000 00 00</li>
+          <li><span>KRS</span>0000000000</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== STOPKA ===== -->
+  <footer class="stopka">
+    <div class="kontener stopka__wnetrze">
+      <div>
+        <p class="stopka__logo">Fundacja Wielkie Serca</p>
+        <p>Pomagamy dzieciom chorym na nowotwory i ich rodzinom.</p>
+      </div>
+      <div class="stopka__projekt">
+        <h2>O projekcie</h2>
+        <p>Strona powstała jako praca zaliczeniowa z informatyki. Autorzy: <strong>Dawid Fila, Patryk Fac, Stanisław Korulczyk</strong>, V Liceum Ogólnokształcące im. Marii Skłodowskiej-Curie w Lublinie, 2026.</p>
+        <p>Fundacja, jej historia, liczby i dane kontaktowe są fikcyjne.</p>
+        <p class="stopka__zrodla">Zdjęcia: StockSnap.io i Flickr, licencja CC0 (domena publiczna).</p>
+      </div>
+    </div>
+    <p class="stopka__dol">© 2026 Wielkie Serca. Projekt edukacyjny.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

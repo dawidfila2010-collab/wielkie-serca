@@ -1,0 +1,372 @@
+/* =========================================================
+   Fundacja Wielkie Serca - arkusz stylów
+   Kolory trzymamy w zmiennych. Tryb ciemny i wysoki kontrast
+   podmieniają tylko wartości zmiennych.
+   ========================================================= */
+
+:root {
+  --tlo: #fffaf4;
+  --tlo-sekcji: #f8ede2;
+  --tekst: #1f2a44;
+  --tekst-slabszy: #4a5470;
+  --czerwien: #c8233a;
+  --czerwien-ciemna: #9e1a2d;
+  --granat: #1f2a44;
+  --na-czerwieni: #ffffff;
+  --karta: #ffffff;
+  --linia: #e6d6c6;
+  --cien: 0 2px 10px rgba(31, 42, 68, 0.08);
+  --promien: 6px;
+  --szerokosc: 1120px;
+  --font-tekst: "Source Sans 3", system-ui, sans-serif;
+  --font-naglowki: "Lora", Georgia, serif;
+}
+
+/* Tryb ciemny: włączany przyciskiem albo ustawieniem systemu */
+:root[data-theme="ciemny"] {
+  --tlo: #141a2b;
+  --tlo-sekcji: #1c2439;
+  --tekst: #eef0f6;
+  --tekst-slabszy: #b9c0d4;
+  --czerwien: #ff6b7f;
+  --czerwien-ciemna: #ff8a9a;
+  --granat: #0d1220;
+  --na-czerwieni: #1a0d10;
+  --karta: #222b42;
+  --linia: #33405e;
+  --cien: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="jasny"]) {
+    --tlo: #141a2b;
+    --tlo-sekcji: #1c2439;
+    --tekst: #eef0f6;
+    --tekst-slabszy: #b9c0d4;
+    --czerwien: #ff6b7f;
+    --czerwien-ciemna: #ff8a9a;
+    --granat: #0d1220;
+    --na-czerwieni: #1a0d10;
+    --karta: #222b42;
+    --linia: #33405e;
+    --cien: 0 2px 10px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Wysoki kontrast: czarne tło, żółte akcenty, grube obramowania */
+:root[data-contrast="wysoki"] {
+  --tlo: #000000;
+  --tlo-sekcji: #000000;
+  --tekst: #ffffff;
+  --tekst-slabszy: #ffffff;
+  --czerwien: #ffe600;
+  --czerwien-ciemna: #ffe600;
+  --granat: #000000;
+  --na-czerwieni: #000000;
+  --karta: #000000;
+  --linia: #ffffff;
+  --cien: none;
+}
+:root[data-contrast="wysoki"] .karta,
+:root[data-contrast="wysoki"] .osoba,
+:root[data-contrast="wysoki"] .opowiesc,
+:root[data-contrast="wysoki"] .krok,
+:root[data-contrast="wysoki"] .kalkulator__formularz,
+:root[data-contrast="wysoki"] .pytanie { border: 2px solid #ffffff; }
+:root[data-contrast="wysoki"] a { text-decoration: underline; }
+:root[data-contrast="wysoki"] .hero::before { background: rgba(0, 0, 0, 0.88); }
+
+/* ===== Podstawy ===== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  margin: 0;
+  font-family: var(--font-tekst);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--tekst);
+  background: var(--tlo);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3, h4 { font-family: var(--font-naglowki); line-height: 1.2; margin: 0 0 0.6em; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+h2 { font-size: clamp(1.75rem, 3.2vw, 2.4rem); }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.15rem; }
+p { margin: 0 0 1em; }
+
+a { color: var(--czerwien); }
+a:hover { color: var(--czerwien-ciemna); }
+
+:focus-visible { outline: 3px solid var(--czerwien); outline-offset: 3px; }
+
+.kontener { width: min(100% - 32px, var(--szerokosc)); margin-inline: auto; }
+.kontener--waski { max-width: 780px; }
+
+.pomin {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--granat); color: #fff; padding: 10px 16px; z-index: 100;
+}
+.pomin:focus { left: 16px; }
+
+.pasek-projekt {
+  margin: 0; padding: 6px 16px; text-align: center; font-size: 0.875rem;
+  background: var(--granat); color: #fff;
+}
+
+/* ===== Przyciski ===== */
+.przycisk {
+  display: inline-block; padding: 12px 24px; border: 2px solid var(--czerwien);
+  border-radius: var(--promien); background: var(--czerwien); color: var(--na-czerwieni);
+  font: 700 1rem var(--font-tekst); text-decoration: none; cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+.przycisk:hover { background: var(--czerwien-ciemna); border-color: var(--czerwien-ciemna); color: var(--na-czerwieni); transform: translateY(-2px); }
+.przycisk--obrys { background: transparent; color: #fff; border-color: #fff; }
+.przycisk--obrys:hover { background: #fff; border-color: #fff; color: #1f2a44; }
+.przycisk--jasny { background: #fff; color: #1f2a44; border-color: #fff; }
+.przycisk--jasny:hover { background: #f8ede2; border-color: #f8ede2; color: #1f2a44; }
+
+/* ===== Nagłówek i menu ===== */
+.naglowek {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--tlo); border-bottom: 1px solid var(--linia);
+  transition: background-color 0.3s;
+}
+.naglowek__wnetrze { display: flex; align-items: center; gap: 20px; min-height: 68px; }
+
+.logo {
+  display: flex; align-items: center; gap: 8px; text-decoration: none;
+  font: 700 1.25rem var(--font-naglowki); color: var(--tekst);
+}
+.logo:hover { color: var(--tekst); }
+.logo__serce { width: 30px; height: 30px; fill: var(--czerwien); }
+
+.menu { display: flex; gap: 18px; margin-left: auto; }
+.menu a { color: var(--tekst); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.menu a:hover { color: var(--czerwien); }
+
+.narzedzia { display: flex; gap: 6px; }
+.narzedzie {
+  min-width: 38px; height: 38px; padding: 0 8px;
+  border: 1px solid var(--linia); border-radius: var(--promien);
+  background: var(--karta); color: var(--tekst);
+  font: 700 0.9rem var(--font-tekst); cursor: pointer;
+  display: grid; place-items: center;
+}
+.narzedzie svg { width: 18px; height: 18px; }
+.narzedzie:hover, .narzedzie[aria-pressed="true"] { border-color: var(--czerwien); color: var(--czerwien); }
+
+.menu-przycisk {
+  display: none; margin-left: auto; width: 44px; height: 44px; padding: 10px;
+  border: 0; background: transparent; cursor: pointer;
+}
+.menu-przycisk span { display: block; height: 3px; margin: 5px 0; background: var(--tekst); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+.menu-przycisk[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-przycisk[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-przycisk[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative; color: #fff; padding: 96px 0 72px;
+  background: #1f2a44 url("../img/hero-serce.jpg") center / cover no-repeat;
+}
+.hero::before { content: ""; position: absolute; inset: 0; background: rgba(20, 26, 43, 0.72); }
+.hero__wnetrze { position: relative; max-width: 760px; margin-left: max(16px, calc((100% - var(--szerokosc)) / 2)); }
+.hero h1 { color: #fff; }
+.hero__lead { font-size: 1.2rem; max-width: 600px; }
+
+.krs {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
+  margin: 28px 0; padding: 18px 22px; border-left: 5px solid var(--czerwien);
+  background: rgba(255, 255, 255, 0.1);
+}
+.krs__etykieta { width: 100%; font-weight: 600; }
+.krs__numer { font: 700 clamp(1.6rem, 4vw, 2.2rem) var(--font-tekst); letter-spacing: 0.08em; }
+.krs__komunikat { font-weight: 700; color: #ffd66b; }
+
+.hero__przyciski { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.odliczanie { margin-top: 40px; }
+.odliczanie__tytul { margin-bottom: 10px; }
+.odliczanie__pola { display: flex; gap: 10px; flex-wrap: wrap; }
+.odliczanie__pola div {
+  min-width: 78px; padding: 10px 12px; text-align: center;
+  background: rgba(255, 255, 255, 0.12); border-radius: var(--promien);
+}
+.odliczanie__pola strong { display: block; font-size: 1.8rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.odliczanie__pola span { font-size: 0.85rem; }
+
+/* ===== Sekcje ===== */
+.sekcja { padding: 88px 0; }
+.sekcja--tlo { background: var(--tlo-sekcji); }
+.sekcja--ciemna { background: var(--granat); color: #fff; }
+.sekcja--ciemna h2, .sekcja--ciemna h3 { color: #fff; }
+.sekcja__wstep { font-size: 1.15rem; color: var(--tekst-slabszy); max-width: 720px; margin-bottom: 40px; }
+
+/* ===== Kroki ===== */
+.kroki { list-style: none; padding: 0; margin: 0 0 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.krok { position: relative; padding: 28px; background: var(--karta); border-radius: var(--promien); box-shadow: var(--cien); }
+.krok__nr {
+  display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 14px;
+  border-radius: 50%; background: var(--czerwien); color: var(--na-czerwieni);
+  font: 700 1.3rem var(--font-naglowki);
+}
+.krok p { margin: 0; color: var(--tekst-slabszy); }
+
+.wskazowki { margin: 0; padding-left: 20px; color: var(--tekst-slabszy); }
+.wskazowki li { margin-bottom: 6px; }
+.wskazowki li::marker { color: var(--czerwien); }
+
+/* ===== Kalkulator ===== */
+.kalkulator { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.kalkulator__formularz { padding: 32px; background: var(--karta); border-radius: var(--promien); box-shadow: var(--cien); }
+.kalkulator__formularz label { display: block; font-weight: 700; margin-bottom: 8px; }
+.kalkulator__formularz input {
+  width: 100%; padding: 12px 14px; font: 600 1.3rem var(--font-tekst);
+  color: var(--tekst); background: var(--tlo);
+  border: 2px solid var(--linia); border-radius: var(--promien);
+}
+.kalkulator__formularz input:focus { border-color: var(--czerwien); outline: none; }
+.kalkulator__formularz input[aria-invalid="true"] { border-color: #d62828; }
+.kalkulator__blad { min-height: 1.5em; margin: 6px 0 14px; color: #d62828; font-weight: 600; font-size: 0.95rem; }
+:root[data-theme="ciemny"] .kalkulator__blad { color: #ff9b9b; }
+.kalkulator__wynik { border-top: 1px solid var(--linia); padding-top: 18px; }
+.kalkulator__wynik p { margin: 0; }
+.kalkulator__kwota { font: 700 2.6rem var(--font-naglowki); color: var(--czerwien); }
+.kalkulator__znaczenie { color: var(--tekst-slabszy); }
+
+/* ===== O nas ===== */
+.historia { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; margin-bottom: 64px; }
+.historia__tekst p:first-child::first-letter {
+  float: left; font: 700 3.4rem/0.9 var(--font-naglowki); color: var(--czerwien); margin: 6px 8px 0 0;
+}
+.historia__zdjecie { margin: 0; }
+.historia__zdjecie img { border-radius: var(--promien); }
+.historia__zdjecie figcaption { margin-top: 8px; font-size: 0.875rem; color: var(--tekst-slabszy); font-style: italic; }
+
+.zarzad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.osoba { padding: 28px; background: var(--karta); border-radius: var(--promien); box-shadow: var(--cien); border-top: 4px solid var(--czerwien); }
+.osoba__inicjaly {
+  display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 14px;
+  border-radius: 50%; background: var(--tlo-sekcji); color: var(--czerwien);
+  font: 700 1.4rem var(--font-naglowki);
+}
+.osoba h4 { margin-bottom: 2px; }
+.osoba__rola { color: var(--czerwien); font-weight: 700; font-size: 0.95rem; }
+.osoba p:last-child { margin: 0; color: var(--tekst-slabszy); }
+
+/* ===== Karty "Co robimy" ===== */
+.karty { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.karta { padding: 28px; background: var(--karta); border-radius: var(--promien); box-shadow: var(--cien); }
+.karta h3 { padding-bottom: 10px; border-bottom: 3px solid var(--czerwien); display: inline-block; }
+.karta p { margin: 0; color: var(--tekst-slabszy); }
+
+/* ===== Liczby i pasek celu ===== */
+.liczby { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin: 24px 0 56px; }
+.liczba strong { display: block; font: 700 clamp(2rem, 4vw, 2.8rem) var(--font-naglowki); color: #ff8a9a; font-variant-numeric: tabular-nums; }
+:root[data-contrast="wysoki"] .liczba strong { color: #ffe600; }
+.liczba > span { color: #d5dae8; }
+.liczba__jednostka { margin-left: 0.15em; font: 700 0.65em var(--font-tekst); }
+
+.cel { padding: 32px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--promien); }
+.cel p { color: #d5dae8; }
+.cel__pasek { height: 22px; background: rgba(255, 255, 255, 0.15); border-radius: 11px; overflow: hidden; margin: 20px 0 10px; }
+.cel__wypelnienie { width: 0; height: 100%; background: #ff8a9a; border-radius: 11px; transition: width 1.8s ease-out; }
+:root[data-contrast="wysoki"] .cel__wypelnienie { background: #ffe600; }
+.cel__stan { margin: 0; }
+.cel__stan strong { color: #fff; }
+
+/* ===== Historie ===== */
+.historie { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.opowiesc { background: var(--karta); border-radius: var(--promien); box-shadow: var(--cien); overflow: hidden; }
+.opowiesc img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.opowiesc__tresc { padding: 24px; }
+.opowiesc__tresc p { margin: 0; color: var(--tekst-slabszy); }
+
+/* ===== Inne formy pomocy ===== */
+.pomoc { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.pomoc__zdjecie { border-radius: var(--promien); }
+.pomoc__lista { margin: 0; }
+.pomoc__lista dt { font-weight: 700; font-size: 1.1rem; color: var(--czerwien); }
+.pomoc__lista dd { margin: 2px 0 18px; }
+
+/* ===== FAQ ===== */
+.pytanie { border-bottom: 1px solid var(--linia); }
+.pytanie summary {
+  padding: 18px 40px 18px 0; position: relative; cursor: pointer; list-style: none;
+  font-weight: 700; font-size: 1.1rem;
+}
+.pytanie summary::-webkit-details-marker { display: none; }
+.pytanie summary::after {
+  content: "+"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  font-size: 1.6rem; color: var(--czerwien); transition: transform 0.3s;
+}
+.pytanie[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.pytanie p { margin: 0 0 18px; color: var(--tekst-slabszy); }
+
+/* ===== Kontakt ===== */
+.kontakt { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.kontakt__lista { list-style: none; margin: 0; padding: 0; }
+.kontakt__lista li { padding: 12px 0; border-bottom: 1px solid var(--linia); }
+.kontakt__lista span { display: block; font-size: 0.875rem; font-weight: 700; color: var(--tekst-slabszy); }
+
+/* ===== Stopka ===== */
+.stopka { background: var(--granat); color: #d5dae8; padding: 56px 0 0; }
+.stopka__wnetrze { display: grid; grid-template-columns: 1fr 1.5fr; gap: 48px; }
+.stopka__logo { font: 700 1.3rem var(--font-naglowki); color: #fff; }
+.stopka h2 { font-size: 1.2rem; color: #fff; }
+.stopka strong { color: #fff; }
+.stopka__zrodla { font-size: 0.875rem; }
+.stopka__dol { margin: 40px 0 0; padding: 16px; text-align: center; font-size: 0.875rem; border-top: 1px solid rgba(255, 255, 255, 0.15); }
+
+/* ===== Animacje przy przewijaniu =====
+   Klasa .pokaz chowa element, a skrypt dodaje .widoczny,
+   gdy element pojawi się na ekranie. */
+.js .pokaz { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.js .pokaz.widoczny { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .pokaz { opacity: 1; transform: none; transition: none; }
+  .cel__wypelnienie { transition: none; }
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 1080px) {
+  .menu-przycisk { display: block; order: 3; margin-left: 0; }
+  .narzedzia { margin-left: auto; }
+  .menu {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0; padding: 8px 16px 16px;
+    background: var(--tlo); border-bottom: 1px solid var(--linia);
+  }
+  .menu.otwarte { display: flex; }
+  .menu a { padding: 12px 0; border-bottom: 1px solid var(--linia); font-size: 1.05rem; }
+  .kroki, .karty, .historie, .zarzad { grid-template-columns: repeat(2, 1fr); }
+  .liczby { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== Telefon ===== */
+@media (max-width: 720px) {
+  .sekcja { padding: 64px 0; }
+  .hero { padding: 64px 0 56px; }
+  .logo span { display: none; }
+  .narzedzie { min-width: 34px; height: 34px; padding: 0 6px; }
+  .kroki, .karty, .historie, .zarzad,
+  .kalkulator, .historia, .pomoc, .kontakt, .stopka__wnetrze { grid-template-columns: 1fr; gap: 24px; }
+  .odliczanie__pola div { min-width: 64px; flex: 1; }
+}
+
+/* ===== Druk: bez menu i animacji ===== */
+@media print {
+  .naglowek, .pasek-projekt, .hero__przyciski, .krs__kopiuj, .odliczanie { display: none; }
+  .hero { background: none; color: #000; padding: 0; }
+  .hero::before { display: none; }
+  .js .pokaz { opacity: 1; transform: none; }
+}
